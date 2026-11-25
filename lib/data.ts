@@ -6,7 +6,7 @@ export const site = {
   company: "Tech Twist Global",
   email: "admin@techtwistglobal.com",
   website: "www.techtwistglobal.com",
-  location: "Lahore, Pakistan",
+  location: "312 3rd Floor, Gullberg Main Boulevard, Lahore, Pakistan",
   phone: "923123308055", // international digits for 03123308055 (used for tel: links and structured data)
   phoneLocal: "0312 3308055", // what visitors see
   // WhatsApp number, digits only (country code + number). Same as phone until you set a different one.
