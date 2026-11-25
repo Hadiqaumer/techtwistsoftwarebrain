@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  body { @apply bg-ground font-sans text-ink antialiased; }
+  section[id] { scroll-margin-top: 84px; }
+  /* headings never overflow a narrow screen and break onto balanced lines */
+  h1, h2, h3 { overflow-wrap: break-word; text-wrap: balance; }
+  img, video { max-width: 100%; }
+}
+@layer components {
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-full bg-chili px-6 py-3.5 text-[15px] font-extrabold text-white transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink; }
+  .btn-ghost { @apply inline-flex items-center justify-center rounded-full border-2 border-chili px-6 py-3 text-[15px] font-extrabold text-chili transition hover:bg-chili hover:text-white; }
+  .pill { @apply inline-flex items-center gap-2 rounded-full border border-white bg-white/75 px-3.5 py-2 text-[13px] font-extrabold text-ink; }
+  .eyebrow { @apply text-[13px] font-extrabold tracking-[.14em] text-chili; }
+  .lead { @apply text-base font-medium leading-[1.7] text-muted sm:text-lg; }
+  .card { @apply rounded-[26px] border border-ink/10 bg-white shadow-[0_18px_34px_-24px_rgba(13,43,62,.5)]; }
+  .ib { @apply flex shrink-0 items-center justify-center; }
+  /* one width for the whole site: content is capped at 1350px, backgrounds stay full width */
+  .px-wrap { padding-inline: max(1.25rem, calc((100% - 1350px) / 2)); }
+  .section { padding-block: 4rem; padding-inline: max(1.25rem, calc((100% - 1350px) / 2)); }
+  /* fluid headings: scale smoothly on every device */
+  .h2 { font-size: clamp(1.45rem, 1.05rem + 2.3vw, 3rem); line-height: 1.08; font-weight: 800; letter-spacing: -0.015em; margin-top: .75rem; color: #0D2B3E; }
+  .h1 { font-size: clamp(2rem, 1.35rem + 3.3vw, 4.1rem); line-height: 1.04; font-weight: 800; letter-spacing: -0.02em; }
+}
+
+@media (min-width: 640px) { .px-wrap, .section { padding-inline: max(1.5rem, calc((100% - 1350px) / 2)); } }
+@media (min-width: 1024px) { .section { padding-block: 5.5rem; } }
+@media (max-width: 639px) {
+  .px-wrap, .section { padding-inline: 1rem; }
+  .section { padding-block: 2.75rem; }
+  .eyebrow { font-size: 11.5px; }
+  .lead { font-size: .95rem; line-height: 1.6; }
+  .card { border-radius: 20px; }
+  .btn, .btn-ghost { padding: .7rem 1.25rem; font-size: 14px; }
+}
+
+/* 3D photo wall (cover-flow): flat grid on phones, tilted row from tablets up */
+@media (min-width: 768px) {
+  .wall { display: flex; align-items: center; justify-content: center; perspective: 1700px; }
+  .w1 { transform: rotateY(38deg) scale(.82); } .w2 { transform: rotateY(24deg) scale(.92); }
+  .w3 { z-index: 3; } .w4 { transform: rotateY(-24deg) scale(.92); } .w5 { transform: rotateY(-38deg) scale(.82); }
+}
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.float { animation: float 6s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .float { animation: none; }
+}
+
+/* ───────── Phone performance ─────────
+   Frosted-glass blur and endless background animation are the two things that make scrolling janky on
+   phones. Below 768px we drop them (the cards keep their glass colours), so scrolling stays at 60fps. */
+@media (max-width: 767px) {
+  [class*="backdrop-blur"] { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+  .lv-drift, .ab-orb, .cta-drift { display: none !important; }
+  .stage-card { filter: none !important; }
+  .float { animation-duration: 8s; }
+}

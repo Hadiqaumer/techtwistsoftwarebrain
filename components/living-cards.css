@@ -1,0 +1,32 @@
+/* Animations for the "living elements" in Modules.glass.js.
+   Import once, e.g. in app/globals.css:  @import "./living-cards.css";  */
+
+@keyframes lv-scan  { 0%, 100% { top: 4%; } 50% { top: 88%; } }
+@keyframes lv-pop   { 0%, 52% { opacity: 0; transform: scale(.8); } 60%, 88% { opacity: 1; transform: scale(1); } 96%, 100% { opacity: 0; transform: scale(.9); } }
+@keyframes lv-grow  { 0% { transform: scaleX(.06); } 65%, 100% { transform: scaleX(1); } }
+@keyframes lv-bar   { 0%, 100% { transform: scaleY(.3); } 50% { transform: scaleY(1); } }
+@keyframes lv-sweep { 0% { transform: translateY(-120%); } 100% { transform: translateY(420%); } }
+@keyframes lv-blink { 0%, 100% { opacity: 1; } 50% { opacity: .15; } }
+@keyframes lv-bob   { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+@keyframes lv-track { 0%, 100% { transform: translate(0, 0); } 33% { transform: translate(18px, -5px); } 66% { transform: translate(6px, 8px); } }
+@keyframes lv-dot   { 0%, 100% { opacity: .35; transform: scale(.8); } 50% { opacity: 1; transform: scale(1.25); } }
+@keyframes lv-drift { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(40px, -28px); } }
+@keyframes lv-draw  { from { stroke-dashoffset: 120; } to { stroke-dashoffset: 0; } }
+
+.lv-scan  { animation: lv-scan 3.4s ease-in-out infinite; }
+.lv-pop   { animation: lv-pop 3.4s ease-in-out infinite; }
+.lv-grow  { transform-origin: left center; animation: lv-grow 3.6s ease-in-out infinite; }
+.lv-bar   { transform-origin: bottom center; animation: lv-bar 3.2s ease-in-out infinite; }
+.lv-sweep { animation: lv-sweep 3.8s linear infinite; }
+.lv-blink { animation: lv-blink 1.2s steps(2, end) infinite; }
+.lv-bob   { animation: lv-bob 3.6s ease-in-out infinite; }
+.lv-track { animation: lv-track 5s ease-in-out infinite; }
+.lv-dot   { transform-origin: center; transform-box: fill-box; animation: lv-dot 1.8s ease-in-out infinite; }
+.lv-drift { animation: lv-drift 10s ease-in-out infinite; }
+.lv-draw  { stroke-dasharray: 120; stroke-dashoffset: 120; animation: lv-draw 1.3s .4s ease-out forwards; }
+
+@media (prefers-reduced-motion: reduce) {
+  .lv-scan, .lv-pop, .lv-grow, .lv-bar, .lv-sweep, .lv-blink,
+  .lv-bob, .lv-track, .lv-dot, .lv-drift { animation: none !important; }
+  .lv-draw { animation: none !important; stroke-dashoffset: 0; }
+}
